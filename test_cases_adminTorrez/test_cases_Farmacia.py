@@ -32,6 +32,7 @@ class TestFarmacia:
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//button[contains(@class, 'p-button-outlined')]/span[contains(text(), 'Limpiar')]").click()
         time.sleep(2)
+        
     def test_Registrar_Nuevo_Producto(self):
         self.driver.find_element(By.XPATH, "//input[@id='nombre_medicamento']").send_keys("Paracetamol")
         time.sleep(2)
@@ -53,6 +54,7 @@ class TestFarmacia:
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//button[contains(@class, 'bg-orange-500')]/span[contains(text(), 'Registrar')]").click()
         time.sleep(2)
+        
     def test_Limpiar_Formulario(self):
         self.driver.find_element(By.XPATH, "//input[@id='nombre_medicamento']").send_keys("Temporal")
         time.sleep(2)
@@ -71,6 +73,7 @@ class TestFarmacia:
         time.sleep(2)
         resultados = self.driver.find_elements(By.XPATH, "//td[contains(text(), 'Paracetamol')]")
         assert len(resultados) > 0, "El producto no fue encontrado."
+        
     def test_editar_nombre_producto(self):
         self.driver.find_element(By.XPATH, "//td[contains(text(), 'Paracetamol')]").click()
         time.sleep(2)
@@ -80,6 +83,7 @@ class TestFarmacia:
         time.sleep(1)
         self.driver.find_element(By.XPATH, "//button[span[contains(text(), 'Guardar')]]").click()
         time.sleep(2)
+        
     def test_eliminar_producto(self):
         self.driver.find_element(By.XPATH, "//td[contains(text(), 'Paracetamol')]").click()
         time.sleep(2)
@@ -87,6 +91,7 @@ class TestFarmacia:
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//button[span[contains(text(), 'Si')]]").click()
         time.sleep(2)
+        
     def test_cancelar_eliminar_producto(self):
         self.driver.find_element(By.XPATH, "//td[contains(text(), 'Paracetamol')]").click()
         time.sleep(2)
@@ -94,6 +99,7 @@ class TestFarmacia:
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//button[span[contains(text(), 'No')]]").click()
         time.sleep(2)
+        
     def test_buscar_producto_metformina(self):
         self.driver.find_element(By.XPATH, "//input[@placeholder='Buscar producto...']").send_keys("Metformina")
         time.sleep(2)
@@ -114,7 +120,6 @@ class TestFarmacia:
         self.driver.find_element(By.XPATH, "//button[span[contains(text(), 'No')]]").click()
         time.sleep(2)
     def test_verificar_sin_productos_inactivos(self):
-    # Intentar buscar "Metformina" en la tabla después de habilitarla
        self.driver.find_element(By.XPATH, "//input[@placeholder='Buscar producto...']").send_keys("Metformina")
        time.sleep(2)
 
@@ -168,7 +173,7 @@ class TestFarmacia:
        self.driver.find_element(By.XPATH, "//input[@id='representante']").clear()
        self.driver.find_element(By.XPATH, "//input[@id='representante']").send_keys("Juan Pérez")
        time.sleep(1)
-       self.driver.find_element(By.XPATH, "//span[@id='telefono_proveedor']").click()  # Clic para activar
+       self.driver.find_element(By.XPATH, "//span[@id='telefono_proveedor']").click()
        self.driver.find_element(By.XPATH, "//span[@id='telefono_proveedor']/input").clear()
        self.driver.find_element(By.XPATH, "//span[@id='telefono_proveedor']/input").send_keys("987654321")
        time.sleep(1)
