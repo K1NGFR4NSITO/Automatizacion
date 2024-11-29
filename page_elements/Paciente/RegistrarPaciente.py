@@ -1,58 +1,52 @@
-
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 # Configuración automática del WebDriver
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(ChromeDriverManager().install())
 
 # Maximizar la ventana del navegador
 driver.maximize_window()
 
 # Abrir url en el navegador
 driver.get('https://www.multicine.com.bo/register')
-time.sleep(5)
 
+# Espera hasta que el botón 'LA PAZ' sea interactuable
+wait = WebDriverWait(driver, 10)
+wait.until(EC.element_to_be_clickable((By.XPATH, "//div[text()= ' LA PAZ ']"))).click()
 
-driver.find_element(By.XPATH, "//div[text()= ' LA PAZ ']").click()
-driver.find_element(By.XPATH, "//span[text()= 'Aceptar']").click()
-time.sleep(5)
+# Aceptar pop-up
+wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= 'Aceptar']"))).click()
 
-driver.get('https://www.multicine.com.bo/register')
-time.sleep(2)
-# Acciones para interactuar con el navegador
-driver.find_element(By.XPATH, "//input[@name= 'firstname' ]").send_keys("Jorge")
-driver.find_element(By.XPATH, "//input[@name= 'lastname' ]").send_keys("Lima")
-driver.find_element(By.XPATH, "//input[@name= 'address' ]").send_keys("jorgelima@gmail.com")
-time.sleep(5)
+# Llenar el formulario
+wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name= 'firstname' ]"))).send_keys("Jorge")
+wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name= 'lastname' ]"))).send_keys("Lima")
+wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name= 'address' ]"))).send_keys("jorgelima@gmail.com")
 
+# Seleccionar una opción de ion-select
+wait.until(EC.element_to_be_clickable((By.XPATH, "//ion-select[@name='mySelect']"))).click()
+wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class= 'alert-radio-group sc-ion-alert-md']"))).click()
 
+# Elegir el sexo
+wait.until(EC.element_to_be_clickable((By.XPATH, "//label[text() = 'Hombre']//input[@id = 'sex']"))).click()
 
-driver.find_element(By.XPATH, "//ion-select[@name='mySelect']").click()
-driver.find_element(By.XPATH, "//div[@class= 'alert-radio-group sc-ion-alert-md']").click()
-driver.find_element(By.XPATH, "//button[@id= 'alert-input-8-3']//div[@class='alert-radio-icon sc-ion-alert-md']").click()
-driver.find_element(By.XPATH, "//button[@class= 'alert-button ion-focusable ion-activatable sc-ion-alert-md']").click()
-time.sleep(2)
+# Escribir la contraseña
+wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name= 'reg_passwd__' ]"))).send_keys("Gato1234")
 
-# Acciones para interactuar con el navegador
+# Seleccionar la fecha de nacimiento
+wait.until(EC.element_to_be_clickable((By.XPATH, "//select[@id='day']"))).click()
+wait.until(EC.element_to_be_clickable((By.XPATH, "//select[@name= 'birthday_day' ]//option[text() = '17']"))).click()
+wait.until(EC.element_to_be_clickable((By.XPATH, "//select[@name= 'birthday_month' ]//option[text() = 'ago']"))).click()
+wait.until(EC.element_to_be_clickable((By.XPATH, "//select[@name= 'birthday_year' ]//option[text() = '2002']"))).click()
 
-driver.find_element(By.XPATH, "//input[@name= 'reg_passwd__' ]").send_keys("Gato1234")
-time.sleep(5)
-#driver.find_element(By.XPATH, "LOCATORS").click()
+# Enviar el formulario
+wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@name= 'websubmit' ]"))).click()
 
-driver.find_element(By.XPATH, "//select[@id='day']").click()
-
-driver.find_element(By.XPATH, "//select[@name= 'birthday_day' ]//option[text() = '17']").click()
-driver.find_element(By.XPATH, "//select[@name= 'birthday_month' ]//option[text() = 'ago']").click()
-driver.find_element(By.XPATH, "//select[@name= 'birthday_year' ]//option[text() = '2002']").click()
-
-driver.find_element(By.XPATH, "//label[text() = 'Hombre']//input[@id = 'sex']").click()
-time.sleep(5)
-driver.find_element(By.XPATH, "//button[@name= 'websubmit' ]").click
+# Cerrar el navegador después de un pequeño tiempo
 time.sleep(3)
 driver.quit()
-
 
 print("Prueba visual completada")
