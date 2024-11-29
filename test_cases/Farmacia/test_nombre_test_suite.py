@@ -16,3 +16,5 @@ class TestFarmacia:
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//input[@inputid='password1']").send_keys("Qwerty123")
         time.sleep(2)
+        self.driver.find_element(By.XPATH,"//input[@inputid='']").send_keys("")
+        time.sleep(2)
