@@ -12,9 +12,9 @@ class TestLoginnn:
     def teardown_method(self):
         self.driver.quit()
     def testLogin(self):
-        self.driver.find_element(By.XPATH,"//input[@inputid='email1']").send_keys("francisco@gmail.com")
+        self.driver.find_element(By.XPATH,"//input[@inputid='email1']").send_keys("fabri@gmail.com")
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"//input[@inputid='password1']").send_keys("Qwerty123")
+        self.driver.find_element(By.XPATH,"//input[@inputid='password1']").send_keys("Fabri123")
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//button[@class='p-button p-component w-full p-3 text-xl bg-orange-400']").click()
         time.sleep(5)
